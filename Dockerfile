@@ -15,15 +15,14 @@ ENV GLIDE_PATH $GOPATH/src/github.com/Masterminds/glide
 ENV ASTILELECTRON_PATH $GOPATH/src/github.com/asticode/go-astilectron-bundler
 ENV KELP_PATH $GOPATH/src/github.com/stellar/kelp
 
-# install glide
+# install kelp + glide
 RUN git clone https://github.com/Masterminds/glide $GLIDE_PATH && \
   cd $GLIDE_PATH && \
   make build
 
-
 # install kelp
-
-RUN mv $GLIDE_PATH/glide $KELP_PATH && \
+RUN git clone https://github.com/Ebioro/stellar-kelp.git . && \
+  mv $GLIDE_PATH/glide $KELP_PATH && \
   git fetch --tags && \
   ./glide install
 
